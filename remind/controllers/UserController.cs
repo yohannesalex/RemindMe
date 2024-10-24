@@ -25,7 +25,9 @@ namespace remind.controllers
             try{service.CreateUser(user);
             var authService = new AuthService(config);
             var token = authService.GenerateToken(user);
-            return Ok(new { Token = token });}
+            return Ok(new {
+                User = user,
+                Token = token });}
             catch (Exception e){
                 Console.WriteLine(e.Message);
                 if (e.Message == "User already exists"){

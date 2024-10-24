@@ -94,3 +94,4 @@ C:\.net\rem\RemindMe\remind\obj\Debug\net8.0\refint\remind.dll
 C:\.net\rem\RemindMe\remind\obj\Debug\net8.0\remind.pdb
 C:\.net\rem\RemindMe\remind\obj\Debug\net8.0\remind.genruntimeconfig.cache
 C:\.net\rem\RemindMe\remind\obj\Debug\net8.0\ref\remind.dll
+C:\.net\rem\RemindMe\remind\obj\Debug\net8.0\remind.sourcelink.json
