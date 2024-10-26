@@ -13,6 +13,30 @@
       "PackagePath": "staticwebassets\\favicon.ico"
     },
     {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\040f5627-69c9-4524-b314-6251deba0e77.png",
+      "PackagePath": "staticwebassets\\images\\040f5627-69c9-4524-b314-6251deba0e77.png"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\0e2324b0-f42d-4fa6-be9e-2f2f0f342d02.png",
+      "PackagePath": "staticwebassets\\images\\0e2324b0-f42d-4fa6-be9e-2f2f0f342d02.png"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\0e377d64-713e-42db-8945-ccec08eb369d.png",
+      "PackagePath": "staticwebassets\\images\\0e377d64-713e-42db-8945-ccec08eb369d.png"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\5c70466a-5847-4929-80d6-7f84fe3c5cf6.png",
+      "PackagePath": "staticwebassets\\images\\5c70466a-5847-4929-80d6-7f84fe3c5cf6.png"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\744f6e42-c77c-49c4-9ea4-edcd29e2534c.png",
+      "PackagePath": "staticwebassets\\images\\744f6e42-c77c-49c4-9ea4-edcd29e2534c.png"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\eba555de-5f82-4246-96a5-cbb356ba2d89.png",
+      "PackagePath": "staticwebassets\\images\\eba555de-5f82-4246-96a5-cbb356ba2d89.png"
+    },
+    {
       "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\js\\site.js",
       "PackagePath": "staticwebassets\\js\\site.js"
     },

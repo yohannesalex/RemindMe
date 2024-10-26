@@ -9,7 +9,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddControllers();  // Register controllers
+builder.Services.AddControllers(); 
+builder.Services.AddScoped<MediaContentService>();  // Register controllers
 //configure Auth
 builder.Services.AddAuthentication(options =>
 {

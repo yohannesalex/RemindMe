@@ -49,6 +49,7 @@ namespace remind.controllers
             var token = authService.GenerateToken(existingUser);
             return Ok(new { Token = token });
         }
+        
 
     }
 }
