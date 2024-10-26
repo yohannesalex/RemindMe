@@ -29,7 +29,7 @@ namespace remind.services
             return mediaContent;
         }
 
-        public async Task<string> UploadImageAsync(IFormFile file)
+        public async Task<string?> UploadImageAsync(IFormFile file)
         {
             if (file == null || file.Length == 0)
                 return null;
