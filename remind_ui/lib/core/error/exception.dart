@@ -4,4 +4,4 @@ class CacheException implements Exception {}
 
 class SocketException implements Exception {}
 
-class ImageException implements Exception {}
+class InvalidUserCredentialsException implements Exception {}

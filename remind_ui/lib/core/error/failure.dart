@@ -13,4 +13,4 @@ class SocketFailure extends Failure {}
 
 class ConnectionFailure extends Failure {}
 
-class InvalidInputFailure extends Failure {}
+class InvalidUserCrediential extends Failure {}
