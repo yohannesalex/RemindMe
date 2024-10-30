@@ -40,5 +40,14 @@ namespace remind.services
 
             return new JwtSecurityTokenHandler().WriteToken(token);
         }
+        public string? GetEmailFromToken(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            var jwtToken = handler.ReadJwtToken(token);
+
+            // Extract the email claim
+            var emailClaim = jwtToken.Claims.FirstOrDefault(claim => claim.Type == ClaimTypes.Email);
+            return emailClaim?.Value;
+        }
     }
 }

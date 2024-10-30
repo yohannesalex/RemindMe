@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.DataProtection.XmlEncryption;
 using Microsoft.AspNetCore.Mvc;
 using remind.models;
 using remind.services;
@@ -17,6 +18,16 @@ namespace remind.controllers
         {
             this.service = service;
             this.config = config;
+        }
+        [Authorize]
+        [HttpGet("me")]
+        public ActionResult<string> GetCurrentUserEmail()
+        { var authService = new AuthService(config);
+            // Retrieve the token from the Authorization header
+            string token = HttpContext.Request.Headers["Authorization"].ToString().Replace("Bearer ", "");
+            string? email = authService.GetEmailFromToken(token);
+            var existingUser = service.GetUsers().FirstOrDefault(u => u.Email == email);
+            return Ok(new {userName = existingUser!.UserName });
         }
 
         [HttpPost("signup")]
