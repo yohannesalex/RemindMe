@@ -17,8 +17,10 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   Future<void> cacheToken(TokenTakerModel tokenToCache) {
     try {
       final cachedToken = tokenToCache.token;
+      print("cachedToken: $cachedToken");
       return sharedPreferences.setString(CACHED_Token, cachedToken);
     } catch (e) {
+      print("cacheToken error: $e");
       throw CacheException();
     }
   }

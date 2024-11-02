@@ -16,7 +16,7 @@ class SignupResponseModel extends SignUpEntity {
 
   Map<String, dynamic> toJson() {
     return {
-      'name': name,
+      'username': name,
       'email': email,
       'password': password,
     };

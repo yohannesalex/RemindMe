@@ -33,10 +33,8 @@ class Welcome extends StatelessWidget {
               begin: Alignment.bottomCenter,
               end: Alignment.topCenter,
               colors: [
-                Color.fromARGB(255, 105, 118, 235)
-                    .withOpacity(1.0), // Full opacity
-                Color.fromARGB(255, 93, 106, 224)
-                    .withOpacity(0.5), // 50% opacity
+                Color(0xFFFFEBEE).withOpacity(1.0), // Full opacity
+                Color(0xFFFFEBEE).withOpacity(0.5), // 50% opacity
               ],
             ),
           ),

@@ -22,13 +22,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   @override
   Future<GetMeResponseModel> getMe(String token) async {
     final response = await client.get(
-      Uri.parse('${Uris.baseUrl}/users/me'),
+      Uri.parse('${Uris.baseUrl}/auth/me'),
       headers: {'Authorization': 'Bearer $token'},
     );
     if (response.statusCode == 200) {
+      print("---------------get me response code is${response.statusCode}");
       final jsonResponse = json.decode(response.body);
-      final data = jsonResponse['data'];
-      return (GetMeResponseModel(name: data['name']));
+      print(jsonResponse);
+      return (GetMeResponseModel(name: jsonResponse['userName']));
     } else {
       throw ServerException();
     }
@@ -51,7 +52,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
       final token = jsonResponse['token'];
-      return (TokenTakerModel.fromJson(token));
+      return (TokenTakerModel(token: token));
     } else {
       throw InvalidUserCredentialsException();
     }
@@ -59,6 +60,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
 
   @override
   Future<TokenTakerModel> signUp(SignupResponseModel user) async {
+    print("------------------remote called----------------");
     final jsonBody = {
       'id': "",
       'username': user.name,
@@ -71,12 +73,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       headers: {'Content-Type': 'application/json'},
       body: json.encode(jsonBody),
     );
+    print('-----------------------------');
+    print(response.statusCode);
     if (response.statusCode == 200) {
       final jsonResponse = json.decode(response.body);
-      final token = jsonResponse['token'];
-      return token;
+      final String token = jsonResponse['token'];
+
+      return TokenTakerModel(token: token);
     } else if (response.statusCode == 409) {
-      throw InvalidUserCredentialsException();
+      throw UserAlreadyExistException();
     } else {
       throw ServerException();
     }

@@ -30,8 +30,12 @@ class AuthRepositoryImpl implements AuthRepository {
 
         await authLocalDataSource.cacheToken(result);
         return const Right(null);
-      } on ServerException {
-        return Left(ServerFailure());
+      } catch (e) {
+        if (e is InvalidUserCredentialsException) {
+          return Left(InvalidUserCredientialFailure());
+        } else {
+          return Left(ServerFailure());
+        }
       }
     } else {
       return Left(ConnectionFailure());
@@ -55,9 +59,14 @@ class AuthRepositoryImpl implements AuthRepository {
         final result = await authRemoteDataSource
             .signUp(SignupResponseModel.toModel(user));
         await authLocalDataSource.cacheToken(result);
+
         return const Right(null);
-      } on ServerException {
-        return Left(ServerFailure());
+      } catch (e) {
+        if (e is UserAlreadyExistException) {
+          return Left(UserAlreadyExistFailure());
+        } else {
+          return Left(ServerFailure());
+        }
       }
     } else {
       return Left(ConnectionFailure());
@@ -71,8 +80,12 @@ class AuthRepositoryImpl implements AuthRepository {
       try {
         final result = await authRemoteDataSource.getMe(cachedToken);
         return Right(result.toEntity());
-      } on ServerException {
-        return Left(ServerFailure());
+      } catch (e) {
+        if (e is CacheException) {
+          return Left(CacheFailure());
+        } else {
+          return Left(ServerFailure());
+        }
       }
     } else {
       return Left(ConnectionFailure());

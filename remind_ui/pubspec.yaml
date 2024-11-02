@@ -40,6 +40,12 @@ dependencies:
   internet_connection_checker: ^1.0.0+1
   dartz: ^0.10.1
   shared_preferences: ^2.3.2
+  flutter_bloc: ^8.1.6
+  get_it: ^8.0.2
+  intl: ^0.19.0
+  flutter_vibration: ^0.0.4
+  vibration: ^2.0.1
+  image_picker: ^1.1.2
 
 dev_dependencies:
   flutter_test:

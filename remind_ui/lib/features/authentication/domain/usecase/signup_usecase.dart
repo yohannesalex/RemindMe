@@ -12,6 +12,7 @@ class SignUpUseCase implements UseCase<void, SignUpParams> {
 
   @override
   Future<Either<Failure, void>> call(SignUpParams signUpParams) async {
+    print('SignUpUseCase call');
     return await authRepository.signUp(signUpParams.user);
   }
 }
