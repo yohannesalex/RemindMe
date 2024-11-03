@@ -9,7 +9,7 @@ namespace remind.models
         public ObjectId Id { get; set; }
         
         [BsonRequired]
-        public string? UserId { get; set; }  // Reference to the User
+        public required  string UserId { get; set; }  // Reference to the User
         
         public string? Text { get; set; }
         
@@ -17,7 +17,7 @@ namespace remind.models
         
         public string? Link { get; set; } // Optional link
         
-        public string? Category { get; set; }
+        public required string Category { get; set; }
          // Category for organization
         public string? RemindBy { get; set; }
         

@@ -3,15 +3,28 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using remind.database;
-using remind.services;  // Add this for UserService
+using remind.services;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
-builder.Services.AddControllers(); 
-builder.Services.AddScoped<MediaContentService>();  // Register controllers
-//configure Auth
+builder.Services.AddControllers();
+
+// Enable CORS
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAllOrigins",
+        builder =>
+        {
+            builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader();
+        });
+});
+
+builder.Services.AddScoped<MediaContentService>();
+// Configure Auth
 builder.Services.AddAuthentication(options =>
 {
     options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
@@ -33,15 +46,12 @@ builder.Services.AddAuthentication(options =>
 
 // Register services
 builder.Services.AddScoped<UserService>();
-builder.Services.AddSingleton<AuthService>();  
+builder.Services.AddSingleton<AuthService>();
 // Configure database settings
 builder.Services.Configure<DatabaseSettings>(
     builder.Configuration.GetSection(nameof(DatabaseSettings)));
 builder.Services.AddSingleton<IDatabaseSetting>(db =>
     db.GetRequiredService<IOptions<DatabaseSettings>>().Value);
-
-// Register UserService
-builder.Services.AddScoped<UserService>();  // This is the missing part
 
 var app = builder.Build();
 
@@ -56,11 +66,12 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+app.UseCors("AllowAllOrigins"); // Use the CORS policy
 app.UseAuthentication();
 app.UseAuthorization();
 
 // Map API controllers
-app.MapControllers();  // This will map the API controllers
+app.MapControllers();
 app.MapRazorPages();
 
 app.Run();
