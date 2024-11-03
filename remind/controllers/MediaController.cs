@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Mvc;
 using remind.models;
 using remind.services;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Mvc.ActionConstraints;
+using System.ComponentModel.DataAnnotations;
 
 namespace remind.controllers
 {
@@ -18,10 +20,35 @@ namespace remind.controllers
         {
             this.mediaContentService = mediaContentService;
         }
+        [HttpGet("GetContentById")]
+        public ActionResult<MediaContent> GetMediaContentById(string id)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var mediaContent = mediaContentService.GetUserMediaContent(id);
+
+            if (mediaContent == null)
+            {
+                return NotFound();
+            }
+
+            // Check if the media content belongs to the requesting user
+            if (mediaContent.UserId != userId)
+            {
+                return Forbid();
+            }
+
+            return Ok(mediaContent);
+        }
 
         [HttpGet("GetContents")]
         public ActionResult<List<MediaContent>> GetUserMediaContents()
-        {  
+        {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userId == null)
             {
@@ -32,7 +59,8 @@ namespace remind.controllers
         }
         [HttpGet("GetContentByCategory")]
         public ActionResult<List<MediaContent>> GetUserMediaContentsBycatagory(string catagory)
-        {   Console.WriteLine(catagory);
+        {
+            Console.WriteLine(catagory);
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userId == null)
             {
@@ -43,7 +71,7 @@ namespace remind.controllers
         }
         [HttpGet("GetContentByRemind")]
         public ActionResult<List<MediaContent>> GetUserMediaContentsByremind(string remindBy)
-        {   
+        {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             if (userId == null)
             {
@@ -52,9 +80,8 @@ namespace remind.controllers
             var contents = mediaContentService.GetUserMediaContentByRemind(userId, remindBy);
             return Ok(contents);
         }
-
         [HttpPost("addContents")]
-        public async Task<ActionResult<MediaContent>> CreateMediaContent([FromForm] MediaContent mediaContent, IFormFile file)
+        public async Task<ActionResult<MediaContent>> CreateMediaContent([FromForm] MediaContent mediaContent, IFormFile? file)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; // Get the user's ID from the JWT token
 
@@ -76,5 +103,62 @@ namespace remind.controllers
             var createdContent = mediaContentService.CreateMediaContent(mediaContent);
             return CreatedAtAction(nameof(GetUserMediaContents), new { userId = userId }, createdContent);
         }
+        [HttpPut("updateContent")]
+        public async Task<ActionResult<MediaContent>> UpdateContent([FromForm] MediaContent mediaContent, IFormFile? file, string id)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; // Get the user's ID from the JWT token
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+            var orginal = mediaContentService.GetUserMediaContent(id);
+            if (orginal == null)
+            {
+                return NotFound();
+            }
+            mediaContent.Id = id;
+            mediaContent.CreatedAt = orginal.CreatedAt;
+
+
+
+
+            mediaContent.UserId = userId;
+
+            // Handle file upload
+            if (file != null && file.Length > 0)
+            {
+                var imageUrl = await mediaContentService.UploadImageAsync(file);
+                Console.WriteLine(imageUrl);
+                mediaContent.ImageUrl = imageUrl; // Set the image URL in the media content
+            }
+
+            mediaContentService.UpdateMediaContent(mediaContent, id);
+            return CreatedAtAction(nameof(GetMediaContentById), new { id = id }, mediaContent);
+        }
+
+        [HttpDelete("deleteContent")]
+        public async Task<IActionResult> DeleteMediaContent(DeleteRequest request)
+        {
+            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; // Get the user's ID from the JWT token
+
+            if (userId == null)
+            {
+                return Unauthorized();
+            }
+
+            var deleted = await mediaContentService.DeleteMediaContentAsync(request.Id, userId);
+            if (deleted)
+            {
+                return NoContent(); // Return 204 No Content if deletion is successful
+            }
+
+            return NotFound(); // Return 404 if content with specified ID was not found
+        }
+
+
+
+
     }
+
 }
