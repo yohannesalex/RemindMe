@@ -46,6 +46,7 @@ dependencies:
   flutter_vibration: ^0.0.4
   vibration: ^2.0.1
   image_picker: ^1.1.2
+  rxdart: ^0.28.0
 
 dev_dependencies:
   flutter_test:
