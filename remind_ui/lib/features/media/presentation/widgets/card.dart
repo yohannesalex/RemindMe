@@ -5,9 +5,16 @@ class CardMedia {
     return Card(
       child: Column(
         children: <Widget>[
-          Image.network(
-            "http://10.0.2.2:5244$imageurl",
-            fit: BoxFit.cover,
+          Container(
+            width: 400,
+            height: 300,
+            child: GestureDetector(
+              child: Image.network(
+                "http://192.168.104.42:5244$imageurl",
+                fit: BoxFit.cover,
+              ),
+              onTap: () {},
+            ),
           ),
           SizedBox(
             height: 5,

@@ -3,14 +3,10 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:intl/intl.dart';
 import 'package:remind_ui/features/media/domain/entities/media_entity.dart';
 import 'package:remind_ui/features/media/presentation/bloc/media_bloc.dart';
 import 'package:remind_ui/features/media/presentation/bloc/media_event.dart';
 
-import '../../../authentication/presentation/bloc/auth_bloc.dart';
-import '../../../authentication/presentation/bloc/auth_event.dart';
-import '../../../authentication/presentation/bloc/auth_state.dart';
 import '../../../authentication/presentation/widget/snackbar.dart';
 import '../bloc/media_state.dart';
 
@@ -26,7 +22,6 @@ class _AddState extends State<Add> {
   final TextEditingController _linkController = TextEditingController();
   final TextEditingController _categoryController = TextEditingController();
   final TextEditingController _keywordController = TextEditingController();
-  final String _date = DateFormat('MMMM d, yyyy').format(DateTime.now());
   final List<String> _options = [
     'Family',
     'School',
@@ -54,71 +49,15 @@ class _AddState extends State<Add> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 242, 189, 172),
-        leadingWidth: 50,
         leading: Padding(
-          padding: const EdgeInsets.only(left: 20),
-          child: PopupMenuButton<String>(
-            icon: const Icon(
-              Icons.person,
-              color: Color.fromARGB(255, 52, 48, 70),
-            ),
-            onSelected: (value) {
-              if (value == 'Log Out') {
-                context.read<AuthBloc>().add(LogOutEvent());
-                Navigator.pushReplacementNamed(context, '/login');
-              }
+          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
+          child: IconButton(
+            onPressed: () {
+              Navigator.pushReplacementNamed(context, '/home');
             },
-            itemBuilder: (BuildContext context) {
-              return [
-                const PopupMenuItem(
-                  value: 'Log Out',
-                  child: Text('Log Out'),
-                ),
-              ];
-            },
+            icon: const Icon(Icons.arrow_back_ios_outlined,
+                color: Color.fromARGB(255, 52, 48, 70)),
           ),
-        ),
-        title: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(left: 5.0),
-              child: Text(
-                _date,
-                style: const TextStyle(
-                  color: Color.fromARGB(255, 52, 48, 70),
-                  fontSize: 12,
-                  fontWeight: FontWeight.w300,
-                ),
-              ),
-            ),
-            const SizedBox(height: 2),
-            Row(
-              children: [
-                const Text(
-                  'Hello, ',
-                  style: TextStyle(
-                      color: Color.fromARGB(255, 52, 48, 70), fontSize: 15),
-                ),
-                BlocBuilder<AuthBloc, AuthState>(
-                  builder: (context, state) {
-                    if (state is GetMeSuccessState) {
-                      return Text(
-                        state.user.name,
-                        style: const TextStyle(
-                          color: Color.fromARGB(255, 8, 3, 91),
-                          fontSize: 15,
-                        ),
-                      );
-                    } else {
-                      return const Text('User');
-                    }
-                  },
-                ),
-              ],
-            ),
-          ],
         ),
         actions: const [
           Text(
@@ -281,8 +220,12 @@ class _AddState extends State<Add> {
                               link: _linkController.text,
                               remindBy: _keywordController.text,
                               category: _categoryController.text,
-                              imageUrl: _image?.path,
+                              imageUrl: _image?.path ?? '',
                               createdAt: '')));
+                      print(
+                          '/////////////////////////////////////////????????');
+                      print(_textController);
+                      print(_linkController);
                     }
                   },
                   child: const Text('Add '),

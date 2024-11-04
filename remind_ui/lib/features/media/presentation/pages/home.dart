@@ -31,13 +31,13 @@ class _HomeState extends State<Home> {
         return Scaffold(
             appBar: AppBar(
               backgroundColor: Color.fromARGB(255, 242, 189, 172),
-              leadingWidth: 50,
               leading: Padding(
-                padding: const EdgeInsets.only(left: 20),
+                padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: PopupMenuButton<String>(
                   icon: const Icon(
                     Icons.person,
                     color: Color.fromARGB(255, 52, 48, 70),
+                    size: 40,
                   ),
                   onSelected: (value) {
                     if (value == 'Log Out') {
@@ -154,47 +154,54 @@ class _HomeState extends State<Home> {
                 ),
               ],
             ),
-            body: Container(
-              child:
-                  BlocBuilder<MediaBloc, MediaState>(builder: (context, state) {
-                if (state is InitialState) {
-                  return const Center(child: Text('No product'));
-                } else if (state is LoadedAllMediaState) {
-                  return Expanded(
-                    child: ListView.builder(
-                      itemCount: state.mediaList.length,
-                      itemBuilder: (context, index) {
-                        return GestureDetector(
-                          child: cardMedia.displaywithImage(
-                              state.mediaList[index].imageUrl,
-                              state.mediaList[index].text,
-                              state.mediaList[index].link,
-                              state.mediaList[index].category,
-                              state.mediaList[index].remindBy,
-                              state.mediaList[index].createdAt),
-                          onTap: () {
-                            // Navigator.push(
-                            //   context,
-                            //   MaterialPageRoute(
-                            //     builder: (context) =>
-                            //         Detail(product: state.productList[index]),
-                            //   ),
-                            // );
+            body: Column(
+              children: [
+                SizedBox(
+                  height: 30,
+                ),
+                Container(
+                  child: BlocBuilder<MediaBloc, MediaState>(
+                      builder: (context, state) {
+                    if (state is InitialState) {
+                      return const Center(child: Text('No product'));
+                    } else if (state is LoadedAllMediaState) {
+                      return Expanded(
+                        child: ListView.builder(
+                          itemCount: state.mediaList.length,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              child: cardMedia.displaywithImage(
+                                  state.mediaList[index].imageUrl ?? '',
+                                  state.mediaList[index].text ?? '',
+                                  state.mediaList[index].link ?? '',
+                                  state.mediaList[index].category,
+                                  state.mediaList[index].remindBy ?? '',
+                                  state.mediaList[index].createdAt),
+                              onTap: () {
+                                // Navigator.push(
+                                //   context,
+                                //   MaterialPageRoute(
+                                //     builder: (context) =>
+                                //         Detail(product: state.productList[index]),
+                                //   ),
+                                // );
+                              },
+                            );
                           },
-                        );
-                      },
-                    ),
-                  );
-                } else if (state is ErrorState) {
-                  return const Center(
-                    child: Text('The products can not be loaded'),
-                  );
-                } else {
-                  return const Center(
-                    child: CircularProgressIndicator(),
-                  );
-                }
-              }),
+                        ),
+                      );
+                    } else if (state is ErrorState) {
+                      return const Center(
+                        child: Text('The products can not be loaded'),
+                      );
+                    } else {
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
+                  }),
+                ),
+              ],
             ));
       },
     );

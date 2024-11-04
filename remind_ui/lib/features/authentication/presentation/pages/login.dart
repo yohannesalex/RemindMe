@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:remind_ui/features/authentication/domain/entity/login_entity.dart';
+import 'package:remind_ui/features/media/presentation/bloc/media_event.dart';
 
+import '../../../media/presentation/bloc/media_bloc.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';
 import '../bloc/auth_state.dart';
@@ -30,7 +32,8 @@ class _LoginState extends State<Login> {
             if (state is AuthLoadingState) {
               const CircularProgressIndicator();
             } else if (state is LoginSuccessState) {
-              context.read<AuthBloc>().add(GetMeEvent());
+              context.read<MediaBloc>().add(LoadAllMediaEvent());
+
               Navigator.pushReplacementNamed(context, '/home');
             } else if (state is LoginErrorState) {
               SnackBarHelper.showCustomSnackBar(
