@@ -1,14 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:remind_ui/features/media/presentation/pages/add.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'bloc_observer.dart';
 import 'features/authentication/presentation/bloc/auth_bloc.dart';
 import 'features/authentication/presentation/bloc/auth_event.dart';
-import 'features/authentication/presentation/pages/home.dart';
 import 'features/authentication/presentation/pages/login.dart';
 import 'features/authentication/presentation/pages/signup.dart';
 import 'features/authentication/presentation/pages/welcome.dart';
+import 'features/media/presentation/bloc/media_bloc.dart';
+import 'features/media/presentation/bloc/media_event.dart';
+import 'features/media/presentation/pages/home.dart';
 import 'injection_container.dart';
 import 'injection_container.dart' as di;
 
@@ -24,13 +27,29 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => AuthBloc(
-        sl(),
-        sl(),
-        sl(),
-        sl(),
-      ),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => AuthBloc(
+            sl(),
+            sl(),
+            sl(),
+            sl(),
+          ),
+        ),
+        BlocProvider(
+            create: (context) => MediaBloc(
+                  sl(),
+                  sl(),
+                  sl(),
+                  sl(),
+                  sl(),
+                  sl(),
+                  sl(),
+                )..add(
+                    LoadAllMediaEvent(),
+                  )),
+      ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Flutter Demo',
@@ -60,6 +79,8 @@ class MyApp extends StatelessWidget {
               return _buildPageRoute(const SignUp());
             case '/home':
               return _buildPageRoute(Home());
+            case '/add':
+              return _buildPageRoute(Add());
             default:
               return null;
           }

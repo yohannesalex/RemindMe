@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:http/http.dart' as http;
 import 'package:http_parser/http_parser.dart';
@@ -37,10 +38,12 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
       'text': media.text ?? '',
       'remindBy': media.remindBy ?? '',
     });
-    if (media.imageUrl != '') {
+    if (media.imageUrl != '' && File(media.imageUrl!).existsSync()) {
       request.files.add(await http.MultipartFile.fromPath(
-          'image', media.imageUrl!,
-          contentType: MediaType('image', 'jpg')));
+        'file',
+        media.imageUrl!,
+        contentType: MediaType('image', 'jpg'),
+      ));
     }
 
     request.headers['Authorization'] = 'Bearer $token';

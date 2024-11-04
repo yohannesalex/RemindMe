@@ -18,7 +18,6 @@ class AddMediaUsecase implements UseCase<void, AddParams> {
 
 class AddParams extends Equatable {
   final MediaEntity media;
-
   const AddParams({required this.media});
   @override
   List<Object?> get props => [media];
