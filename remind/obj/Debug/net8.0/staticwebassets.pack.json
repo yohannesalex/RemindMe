@@ -33,6 +33,14 @@
       "PackagePath": "staticwebassets\\images\\0e377d64-713e-42db-8945-ccec08eb369d.png"
     },
     {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\0f729760-2689-40dd-b230-e383cc765cc5.jpg",
+      "PackagePath": "staticwebassets\\images\\0f729760-2689-40dd-b230-e383cc765cc5.jpg"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\1b30cf3e-4345-4726-af30-a27337bf3bbe.jpg",
+      "PackagePath": "staticwebassets\\images\\1b30cf3e-4345-4726-af30-a27337bf3bbe.jpg"
+    },
+    {
       "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\1d9d66c0-5cec-4ba3-92de-48c38bba0b6b.png",
       "PackagePath": "staticwebassets\\images\\1d9d66c0-5cec-4ba3-92de-48c38bba0b6b.png"
     },
@@ -43,6 +51,10 @@
     {
       "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\236aba24-5062-4d2b-9607-8997b4ea4c67.jpg",
       "PackagePath": "staticwebassets\\images\\236aba24-5062-4d2b-9607-8997b4ea4c67.jpg"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\29fa30ac-bf70-4018-ad2e-65795e10d15f.jpg",
+      "PackagePath": "staticwebassets\\images\\29fa30ac-bf70-4018-ad2e-65795e10d15f.jpg"
     },
     {
       "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\3063069f-18ae-4454-83ff-5f2930009bb0.png",
@@ -73,8 +85,16 @@
       "PackagePath": "staticwebassets\\images\\5c70466a-5847-4929-80d6-7f84fe3c5cf6.png"
     },
     {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\627f7574-d1e0-4f31-bcc2-0ea8db601c31.jpg",
+      "PackagePath": "staticwebassets\\images\\627f7574-d1e0-4f31-bcc2-0ea8db601c31.jpg"
+    },
+    {
       "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\6849e4db-94ff-47ab-a6e5-0999fa637193.png",
       "PackagePath": "staticwebassets\\images\\6849e4db-94ff-47ab-a6e5-0999fa637193.png"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\7216d272-ae17-47da-90b8-695a852cb31e.jpg",
+      "PackagePath": "staticwebassets\\images\\7216d272-ae17-47da-90b8-695a852cb31e.jpg"
     },
     {
       "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\744f6e42-c77c-49c4-9ea4-edcd29e2534c.png",
@@ -85,12 +105,24 @@
       "PackagePath": "staticwebassets\\images\\795d5382-b4da-48e7-89bb-88ae3f3f773e.png"
     },
     {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\8b9268c8-78e6-495d-a275-0c2cddadd693.jpg",
+      "PackagePath": "staticwebassets\\images\\8b9268c8-78e6-495d-a275-0c2cddadd693.jpg"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\8d4841b0-f1d1-4584-b076-e72021c33873.jpg",
+      "PackagePath": "staticwebassets\\images\\8d4841b0-f1d1-4584-b076-e72021c33873.jpg"
+    },
+    {
       "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\98831db6-18d0-4644-8237-c6c72c197265.jpg",
       "PackagePath": "staticwebassets\\images\\98831db6-18d0-4644-8237-c6c72c197265.jpg"
     },
     {
       "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\9abf66eb-9aa9-4ad7-9abb-bef1b55421a2.png",
       "PackagePath": "staticwebassets\\images\\9abf66eb-9aa9-4ad7-9abb-bef1b55421a2.png"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\9b164a66-8e58-47b0-a79a-94937785f052.jpg",
+      "PackagePath": "staticwebassets\\images\\9b164a66-8e58-47b0-a79a-94937785f052.jpg"
     },
     {
       "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\a0593c72-6f41-4271-b247-2d399478fbb8.png",
@@ -109,6 +141,10 @@
       "PackagePath": "staticwebassets\\images\\a65b7464-4b3e-4b39-b14d-1f10979b144a.png"
     },
     {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\ae0d5df7-eae5-4b1d-86a3-908ef8d56c2a.jpg",
+      "PackagePath": "staticwebassets\\images\\ae0d5df7-eae5-4b1d-86a3-908ef8d56c2a.jpg"
+    },
+    {
       "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\ae11d2ca-68a6-41f3-820e-40daa3352ba8.png",
       "PackagePath": "staticwebassets\\images\\ae11d2ca-68a6-41f3-820e-40daa3352ba8.png"
     },
@@ -121,8 +157,28 @@
       "PackagePath": "staticwebassets\\images\\c3d3aa44-1f1c-487b-b439-31d0f67eb81f.png"
     },
     {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\cc231c4f-78bb-41de-b87e-72f183db20cc.jpg",
+      "PackagePath": "staticwebassets\\images\\cc231c4f-78bb-41de-b87e-72f183db20cc.jpg"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\e02357f5-8680-4d96-9912-2c92c17792c6.jpg",
+      "PackagePath": "staticwebassets\\images\\e02357f5-8680-4d96-9912-2c92c17792c6.jpg"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\e0bcf9ea-ba81-43ed-ace6-ba6a9f99495b.jpg",
+      "PackagePath": "staticwebassets\\images\\e0bcf9ea-ba81-43ed-ace6-ba6a9f99495b.jpg"
+    },
+    {
       "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\e5b67e91-1b3e-48e0-8202-ed198124985a.png",
       "PackagePath": "staticwebassets\\images\\e5b67e91-1b3e-48e0-8202-ed198124985a.png"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\e65d2519-8916-4487-aef9-e6991331c9b4.jpg",
+      "PackagePath": "staticwebassets\\images\\e65d2519-8916-4487-aef9-e6991331c9b4.jpg"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\e8dba85f-c97a-48ff-ab99-e2d90c27b341.jpg",
+      "PackagePath": "staticwebassets\\images\\e8dba85f-c97a-48ff-ab99-e2d90c27b341.jpg"
     },
     {
       "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\eba555de-5f82-4246-96a5-cbb356ba2d89.png",
@@ -131,6 +187,14 @@
     {
       "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\f5394127-13f3-4d96-80e9-6aed79bd5377.png",
       "PackagePath": "staticwebassets\\images\\f5394127-13f3-4d96-80e9-6aed79bd5377.png"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\f9b62af4-b072-41e4-94f3-5ddcb008f0e0.jpg",
+      "PackagePath": "staticwebassets\\images\\f9b62af4-b072-41e4-94f3-5ddcb008f0e0.jpg"
+    },
+    {
+      "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\ff80235f-d789-4619-aeb0-70c6da2b44c2.jpg",
+      "PackagePath": "staticwebassets\\images\\ff80235f-d789-4619-aeb0-70c6da2b44c2.jpg"
     },
     {
       "Id": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\js\\site.js",

@@ -97,13 +97,13 @@ namespace remind.controllers
             {
                 var imageUrl = await mediaContentService.UploadImageAsync(file);
                 Console.WriteLine(imageUrl);
-                mediaContent.ImageUrl = imageUrl; // Set the image URL in the media content
+                mediaContent.ImageUrl = imageUrl; 
             }
 
             var createdContent = mediaContentService.CreateMediaContent(mediaContent);
             return CreatedAtAction(nameof(GetUserMediaContents), new { userId = userId }, createdContent);
         }
-        [HttpPut("updateContent")]
+        [HttpPut("updateContent/{id}")]
         public async Task<ActionResult<MediaContent>> UpdateContent([FromForm] MediaContent mediaContent, IFormFile? file, string id)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value; // Get the user's ID from the JWT token
