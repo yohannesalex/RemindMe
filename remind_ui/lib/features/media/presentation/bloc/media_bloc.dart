@@ -78,7 +78,7 @@ class MediaBloc extends Bloc<MediaEvent, MediaState> {
       result.fold((failure) {
         emit(const ErrorState(message: 'unable to load'));
       }, (data) {
-        emit(SuccessState());
+        emit(UpdateSuccessState());
       });
     });
     on<CreateMediaEvent>((event, emit) async {
@@ -96,7 +96,7 @@ class MediaBloc extends Bloc<MediaEvent, MediaState> {
       result.fold((failure) {
         emit(const ErrorState(message: 'unable to load'));
       }, (data) {
-        emit(SuccessState());
+        emit(DeleteSuccessState());
       });
     });
   }

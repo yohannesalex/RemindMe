@@ -42,6 +42,7 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<void> deleteToken() {
     try {
+      print("token deleted");
       return sharedPreferences.remove(CACHED_Token);
     } catch (e) {
       throw CacheException();

@@ -32,6 +32,7 @@ class _LoginState extends State<Login> {
             if (state is AuthLoadingState) {
               const CircularProgressIndicator();
             } else if (state is LoginSuccessState) {
+              context.read<AuthBloc>().add(GetMeEvent());
               context.read<MediaBloc>().add(LoadAllMediaEvent());
 
               Navigator.pushReplacementNamed(context, '/home');
@@ -112,33 +113,10 @@ class _LoginState extends State<Login> {
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Email",
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w400),
-                        ),
-                        const SizedBox(
-                          height: 3,
-                        ),
-                        SizedBox(
-                          width: 300,
-                          height: 35,
-                          child: TextFormField(
-                            controller: _emailController,
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 90, 1,
-                                        1), // Slightly visible border color
-                                    width: 0.1, // Border width
-                                  ),
-                                ),
-                                hintStyle: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color.fromARGB(255, 111, 107, 107))),
-                          ),
-                        ),
+                        _buildTextField(
+                            label: 'Email',
+                            hint: "john@gmail.com",
+                            controller: _emailController),
                       ]),
                   const SizedBox(
                     height: 15,
@@ -146,33 +124,11 @@ class _LoginState extends State<Login> {
                   Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text(
-                          "Password",
-                          style: TextStyle(
-                              fontSize: 15, fontWeight: FontWeight.w400),
-                        ),
-                        const SizedBox(
-                          height: 3,
-                        ),
-                        SizedBox(
-                          width: 300,
-                          height: 35,
-                          child: TextFormField(
+                        _buildTextField(
+                            label: "Password",
+                            hint: "pass1234",
                             controller: _passwordController,
-                            decoration: const InputDecoration(
-                                border: OutlineInputBorder(
-                                  borderSide: BorderSide(
-                                    color: Color.fromARGB(255, 90, 1,
-                                        1), // Slightly visible border color
-                                    width: 0.1, // Border width
-                                  ),
-                                ),
-                                hintStyle: TextStyle(
-                                    fontSize: 15,
-                                    fontWeight: FontWeight.w400,
-                                    color: Color.fromARGB(255, 111, 107, 107))),
-                          ),
-                        ),
+                            obscureText: true),
                       ]),
                   const SizedBox(
                     height: 30,
@@ -245,5 +201,54 @@ class _LoginState extends State<Login> {
             ),
           ),
         ));
+  }
+
+  Widget _buildTextField({
+    required String label,
+    required String hint,
+    required TextEditingController controller,
+    bool obscureText = false,
+  }) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 5.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            label,
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+          const SizedBox(height: 3),
+          SizedBox(
+            width: 300,
+            child: TextFormField(
+              controller: controller,
+              obscureText: obscureText,
+              decoration: InputDecoration(
+                border: const OutlineInputBorder(
+                  borderSide: BorderSide(
+                    color: Color.fromARGB(255, 90, 1, 1),
+                    width: 0.1,
+                  ),
+                ),
+                hintText: hint,
+                hintStyle: const TextStyle(
+                  fontSize: 15,
+                  fontWeight: FontWeight.w400,
+                  color: Color.fromARGB(255, 111, 107, 107),
+                ),
+                errorStyle: const TextStyle(
+                  fontSize: 12,
+                  color: Colors.red,
+                ),
+              ),
+            ),
+          ),
+        ],
+      ),
+    );
   }
 }

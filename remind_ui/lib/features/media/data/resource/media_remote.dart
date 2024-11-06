@@ -58,9 +58,9 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
   Future<void> deleteMedia(String mediaId) async {
     final sharedPreferences = await SharedPreferences.getInstance();
     final token = sharedPreferences.getString('CACHED_Token');
-    final jsonBody = {'id': mediaId};
+    final jsonBody = {"id": mediaId};
     final response = await client.delete(
-      Uri.parse('${Uris.baseUrl}/media/delteContent'),
+      Uri.parse('${Uris.baseUrl}/media/deleteContent'),
       headers: {
         'Authorization': 'Bearer $token',
         'Content-Type': 'application/json',
@@ -68,7 +68,7 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
       body: json.encode(jsonBody),
     );
 
-    if (response.statusCode != 200) {
+    if (response.statusCode != 204) {
       throw ServerException();
     }
   }
@@ -77,23 +77,32 @@ class MediaRemoteDataSourceImpl implements MediaRemoteDataSource {
   Future<void> editMedia(MediaModel media) async {
     final sharedPreferences = await SharedPreferences.getInstance();
     final token = sharedPreferences.getString('CACHED_Token');
-    final mediaId = media.id;
-    final jsonBody = {
-      'category': media.category,
-      'remidBy': media.remindBy,
-      'link': media.link,
-      'text': media.text,
-    };
-
-    final response = await client.put(
-      Uri.parse('${Uris.baseUrl}/media/updateContent$mediaId'),
-      headers: {
-        'Authorization': 'Bearer $token',
-        'Content-Type': 'application/json',
-      },
-      body: json.encode(jsonBody),
+    final uri = Uri.parse('${Uris.baseUrl}/media/updateContent/${media.id}');
+    final request = http.MultipartRequest(
+      'Put',
+      uri,
     );
-    if (response.statusCode != 200) {
+    print('media');
+    print(media);
+    request.fields.addAll({
+      'category': media.category,
+      'link': media.link ?? '',
+      'text': media.text ?? '',
+      'remindBy': media.remindBy ?? '',
+    });
+    if (media.imageUrl != '' && File(media.imageUrl!).existsSync()) {
+      request.files.add(await http.MultipartFile.fromPath(
+        'file',
+        media.imageUrl!,
+        contentType: MediaType('image', 'jpg'),
+      ));
+    }
+
+    request.headers['Authorization'] = 'Bearer $token';
+    final response = await request.send();
+    print('edittttttttttttttttttttttttttttttttttt');
+    print(response.statusCode);
+    if (response.statusCode != 201) {
       throw ServerException();
     }
   }

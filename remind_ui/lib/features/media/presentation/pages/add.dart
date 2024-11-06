@@ -49,15 +49,12 @@ class _AddState extends State<Add> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color.fromARGB(255, 242, 189, 172),
-        leading: Padding(
-          padding: const EdgeInsets.fromLTRB(20, 0, 20, 0),
-          child: IconButton(
-            onPressed: () {
-              Navigator.pushReplacementNamed(context, '/home');
-            },
-            icon: const Icon(Icons.arrow_back_ios_outlined,
-                color: Color.fromARGB(255, 52, 48, 70)),
-          ),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          icon: const Icon(Icons.arrow_back_ios_outlined,
+              color: Color.fromARGB(255, 52, 48, 70)),
         ),
         actions: const [
           Text(
@@ -222,10 +219,6 @@ class _AddState extends State<Add> {
                               category: _categoryController.text,
                               imageUrl: _image?.path ?? '',
                               createdAt: '')));
-                      print(
-                          '/////////////////////////////////////////????????');
-                      print(_textController);
-                      print(_linkController);
                     }
                   },
                   child: const Text('Add '),

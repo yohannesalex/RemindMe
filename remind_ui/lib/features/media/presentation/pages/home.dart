@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/intl.dart';
+import 'package:remind_ui/features/media/domain/entities/media_entity.dart';
 import 'package:remind_ui/features/media/presentation/widgets/card.dart';
 
 import '../../../authentication/presentation/bloc/auth_bloc.dart';
@@ -20,6 +21,21 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final String _date = DateFormat('MMMM d, yyyy').format(DateTime.now());
   final TextEditingController _searchController = TextEditingController();
+  final ScrollController _scrollController = ScrollController();
+
+  @override
+  void initState() {
+    super.initState();
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      _scrollController.jumpTo(0);
+    });
+  }
+
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,7 +46,7 @@ class _HomeState extends State<Home> {
       builder: (context, state) {
         return Scaffold(
             appBar: AppBar(
-              backgroundColor: Color.fromARGB(255, 242, 189, 172),
+              backgroundColor: const Color.fromARGB(255, 242, 189, 172),
               leading: Padding(
                 padding: const EdgeInsets.fromLTRB(20, 0, 0, 0),
                 child: PopupMenuButton<String>(
@@ -156,51 +172,59 @@ class _HomeState extends State<Home> {
             ),
             body: Column(
               children: [
-                SizedBox(
+                const SizedBox(
                   height: 30,
                 ),
-                Container(
-                  child: BlocBuilder<MediaBloc, MediaState>(
-                      builder: (context, state) {
-                    if (state is InitialState) {
-                      return const Center(child: Text('No product'));
-                    } else if (state is LoadedAllMediaState) {
-                      return Expanded(
-                        child: ListView.builder(
-                          itemCount: state.mediaList.length,
-                          itemBuilder: (context, index) {
-                            return GestureDetector(
-                              child: cardMedia.displaywithImage(
-                                  state.mediaList[index].imageUrl ?? '',
-                                  state.mediaList[index].text ?? '',
-                                  state.mediaList[index].link ?? '',
-                                  state.mediaList[index].category,
-                                  state.mediaList[index].remindBy ?? '',
-                                  state.mediaList[index].createdAt),
-                              onTap: () {
-                                // Navigator.push(
-                                //   context,
-                                //   MaterialPageRoute(
-                                //     builder: (context) =>
-                                //         Detail(product: state.productList[index]),
-                                //   ),
-                                // );
-                              },
+                BlocBuilder<MediaBloc, MediaState>(builder: (context, state) {
+                  if (state is InitialState) {
+                    return const Center(child: Text('No product'));
+                  } else if (state is LoadedAllMediaState) {
+                    List<MediaEntity> reversedMediaList =
+                        List.from(state.mediaList.reversed);
+
+                    return Expanded(
+                      child: ListView.builder(
+                        controller: _scrollController,
+                        itemCount: reversedMediaList.length,
+                        reverse: false,
+                        itemBuilder: (context, index) {
+                          if (reversedMediaList[index].imageUrl != null) {
+                            print('#########################################');
+                            print(
+                              state.mediaList[index].remindBy,
                             );
-                          },
-                        ),
-                      );
-                    } else if (state is ErrorState) {
-                      return const Center(
-                        child: Text('The products can not be loaded'),
-                      );
-                    } else {
-                      return const Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
-                  }),
-                ),
+                            return cardMedia.displaywithImage(
+                                context,
+                                reversedMediaList[index].id,
+                                reversedMediaList[index].imageUrl,
+                                reversedMediaList[index].text,
+                                reversedMediaList[index].link,
+                                reversedMediaList[index].category,
+                                reversedMediaList[index].remindBy,
+                                reversedMediaList[index].createdAt);
+                          } else {
+                            return cardMedia.displaywithoutImage(
+                                context,
+                                reversedMediaList[index].id,
+                                reversedMediaList[index].text,
+                                reversedMediaList[index].link,
+                                reversedMediaList[index].category,
+                                reversedMediaList[index].remindBy,
+                                reversedMediaList[index].createdAt);
+                          }
+                        },
+                      ),
+                    );
+                  } else if (state is ErrorState) {
+                    return const Center(
+                      child: Text('The products can not be loaded'),
+                    );
+                  } else {
+                    return const Center(
+                      child: CircularProgressIndicator(),
+                    );
+                  }
+                }),
               ],
             ));
       },

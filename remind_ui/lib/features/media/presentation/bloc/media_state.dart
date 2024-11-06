@@ -14,6 +14,10 @@ class LoadingState extends MediaState {}
 
 class SuccessState extends MediaState {}
 
+class DeleteSuccessState extends MediaState {}
+
+class UpdateSuccessState extends MediaState {}
+
 class LoadedAllMediaState extends MediaState {
   final List<MediaEntity> mediaList;
 

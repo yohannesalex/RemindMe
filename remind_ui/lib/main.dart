@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:remind_ui/features/media/presentation/pages/add.dart';
+import 'package:remind_ui/features/media/presentation/pages/detail.dart';
+import 'package:remind_ui/features/media/presentation/pages/edit.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'bloc_observer.dart';
@@ -38,17 +40,16 @@ class MyApp extends StatelessWidget {
           ),
         ),
         BlocProvider(
-            create: (context) => MediaBloc(
-                  sl(),
-                  sl(),
-                  sl(),
-                  sl(),
-                  sl(),
-                  sl(),
-                  sl(),
-                )..add(
-                    LoadAllMediaEvent(),
-                  )),
+          create: (context) => MediaBloc(
+            sl(),
+            sl(),
+            sl(),
+            sl(),
+            sl(),
+            sl(),
+            sl(),
+          )..add(LoadAllMediaEvent()),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
@@ -57,15 +58,18 @@ class MyApp extends StatelessWidget {
           future: _getInitialRoute(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              // Show a loading screen while checking the token
-              return const Welcome(); // Temporary Welcome page
-            } else {
-              final initialRoute = snapshot.data ?? '/';
-              if (initialRoute == '/home') {
-                // Dispatch GetMeEvent if navigating to home
+              return const Welcome(); // Temporary loading page
+            } else if (snapshot.hasData) {
+              if (snapshot.data == '/home') {
+                // Emit events here after the MultiBlocProvider is in context
                 context.read<AuthBloc>().add(GetMeEvent());
+                context.read<MediaBloc>().add(LoadAllMediaEvent());
+                return Home(); // Navigate to Home page
+              } else {
+                return const Welcome(); // Navigate to Welcome/Login page
               }
-              return _buildHome(initialRoute);
+            } else {
+              return const Welcome(); // Fallback
             }
           },
         ),
@@ -81,6 +85,17 @@ class MyApp extends StatelessWidget {
               return _buildPageRoute(Home());
             case '/add':
               return _buildPageRoute(Add());
+            case '/detail':
+              return _buildPageRoute(Detail(
+                id: '',
+                category: 'defaultCategory',
+                createdAt: DateTime.now().toString(),
+              ));
+            case '/edit':
+              return _buildPageRoute(Edit(
+                id: '',
+                category: 'defaultCategory',
+              ));
             default:
               return null;
           }
@@ -90,21 +105,23 @@ class MyApp extends StatelessWidget {
           colorScheme: ColorScheme.fromSeed(
             seedColor: const Color.fromARGB(255, 63, 81, 243),
           ),
+          fontFamily: 'Poppins', // Set the default font family to Poppins
         ),
       ),
     );
   }
 
   Future<String?> _getInitialRoute() async {
-    // Retrieve the token from shared_preferences
-    SharedPreferences prefs = await SharedPreferences.getInstance();
-    String? token = prefs.getString('CACHED_Token');
-    print('-------------------------------------token: $token');
-    if (token != null) {
-      // If a token exists, route to the home page
-      return '/home';
-    } else {
-      // If no token is found, route to the login page
+    try {
+      SharedPreferences prefs = await SharedPreferences.getInstance();
+      String? token = prefs.getString('CACHED_Token');
+      print('Token: $token');
+      if (token != null && token.isNotEmpty) {
+        return '/home';
+      } else {
+        return '/';
+      }
+    } catch (e) {
       return '/';
     }
   }
@@ -123,13 +140,5 @@ class MyApp extends StatelessWidget {
         );
       },
     );
-  }
-
-  Widget _buildHome(String initialRoute) {
-    if (initialRoute == '/home') {
-      return Home(); // Navigate to home page
-    } else {
-      return const Welcome(); // Navigate to welcome page
-    }
   }
 }

@@ -78,6 +78,11 @@ flutter:
     - family: CaveatBrush
       fonts:
         - asset: assets/fonts/CaveatBrush-Regular.ttf
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+       
+
    
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

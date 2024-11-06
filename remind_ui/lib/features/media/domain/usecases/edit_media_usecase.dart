@@ -12,7 +12,7 @@ class EditMediaUsecase implements UseCase<void, EditParams> {
 
   @override
   Future<Either<Failure, void>> call(EditParams editParams) async {
-    return await mediaRepository.addMedia(editParams.media);
+    return await mediaRepository.editMedia(editParams.media);
   }
 }
 
