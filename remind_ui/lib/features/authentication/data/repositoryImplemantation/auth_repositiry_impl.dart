@@ -25,6 +25,10 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, void>> login(LoginEntity user) async {
     if (await networkInfo.isConnected) {
       try {
+        print(
+            '------------------------------------------user.email: ${user.email}');
+        await authLocalDataSource.cacheEmail(user.email);
+
         final result =
             await authRemoteDataSource.login(LoginResponseModel.toModel(user));
 
@@ -56,8 +60,11 @@ class AuthRepositoryImpl implements AuthRepository {
   Future<Either<Failure, void>> signUp(SignUpEntity user) async {
     if (await networkInfo.isConnected) {
       try {
+        await authLocalDataSource.cacheEmail(user.email);
+
         final result = await authRemoteDataSource
             .signUp(SignupResponseModel.toModel(user));
+        print("result: $result");
         await authLocalDataSource.cacheToken(result);
 
         return const Right(null);

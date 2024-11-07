@@ -1,4 +1,5 @@
 import 'package:dartz/dartz.dart';
+import 'package:remind_ui/features/authentication/data/resource/auth_local.dart';
 import '../../../../core/error/exception.dart';
 import '../../../../core/error/failure.dart';
 import '../../../../core/network/network_info.dart';
@@ -12,11 +13,13 @@ class MediaRepositoryImpl implements MediaRepository {
   final MediaRemoteDataSource mediaRemoteDataSource;
   final MediaLocalDataSource mediaLocalDataSource;
   final NetworkInfo networkInfo;
+  final AuthLocalDataSource authLocalDataSource;
 
   MediaRepositoryImpl(
       {required this.mediaRemoteDataSource,
       required this.mediaLocalDataSource,
-      required this.networkInfo});
+      required this.networkInfo,
+      required this.authLocalDataSource});
   @override
   Future<Either<Failure, void>> addMedia(MediaEntity media) async {
     if (await networkInfo.isConnected) {
@@ -63,8 +66,11 @@ class MediaRepositoryImpl implements MediaRepository {
   Future<Either<Failure, List<MediaEntity>>> getAllMedia() async {
     if (await networkInfo.isConnected) {
       try {
+        print('===========================');
+        final email = await authLocalDataSource.getEmail();
+        print('-----------------------------$email');
         final result = await mediaRemoteDataSource.getAllMedia();
-        await mediaLocalDataSource.cacheAllProducts(result);
+        await mediaLocalDataSource.cacheAllProducts(result, email);
 
         return Right(MediaModel.toEntityList(result));
       } on ServerException {
@@ -72,7 +78,9 @@ class MediaRepositoryImpl implements MediaRepository {
       }
     } else {
       try {
-        final result = await mediaLocalDataSource.getAllProducts();
+        final email = await authLocalDataSource.getEmail();
+
+        final result = await mediaLocalDataSource.getAllProducts(email);
         return Right(MediaModel.toEntityList(result));
       } on CacheException {
         return Left(CacheFailure());

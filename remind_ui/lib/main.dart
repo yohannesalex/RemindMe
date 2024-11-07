@@ -63,7 +63,6 @@ class MyApp extends StatelessWidget {
               if (snapshot.data == '/home') {
                 // Emit events here after the MultiBlocProvider is in context
                 context.read<AuthBloc>().add(GetMeEvent());
-                context.read<MediaBloc>().add(LoadAllMediaEvent());
                 return Home(); // Navigate to Home page
               } else {
                 return const Welcome(); // Navigate to Welcome/Login page

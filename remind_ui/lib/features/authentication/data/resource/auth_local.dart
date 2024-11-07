@@ -7,20 +7,44 @@ abstract class AuthLocalDataSource {
   Future<String> getToken();
   Future<void> cacheToken(TokenTakerModel tokenToCache);
   Future<void> deleteToken();
+  Future<void> cacheEmail(String email);
+  Future<String> getEmail();
 }
 
 class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   final SharedPreferences sharedPreferences;
   final CACHED_Token = 'CACHED_Token';
+  final CACHED_Email = 'CACHED_Email';
   AuthLocalDataSourceImpl({required this.sharedPreferences});
   @override
   Future<void> cacheToken(TokenTakerModel tokenToCache) {
     try {
       final cachedToken = tokenToCache.token;
-      print("cachedToken: $cachedToken");
       return sharedPreferences.setString(CACHED_Token, cachedToken);
     } catch (e) {
-      print("cacheToken error: $e");
+      throw CacheException();
+    }
+  }
+
+  @override
+  Future<void> cacheEmail(String email) {
+    try {
+      return sharedPreferences.setString(CACHED_Email, email);
+    } catch (e) {
+      throw CacheException();
+    }
+  }
+
+  @override
+  Future<String> getEmail() async {
+    try {
+      final cachedEmail = sharedPreferences.getString(CACHED_Email);
+      if (cachedEmail != null) {
+        return Future.value(cachedEmail);
+      } else {
+        throw CacheException();
+      }
+    } catch (e) {
       throw CacheException();
     }
   }
@@ -42,7 +66,6 @@ class AuthLocalDataSourceImpl implements AuthLocalDataSource {
   @override
   Future<void> deleteToken() {
     try {
-      print("token deleted");
       return sharedPreferences.remove(CACHED_Token);
     } catch (e) {
       throw CacheException();

@@ -33,8 +33,11 @@ class _LoginState extends State<Login> {
               const CircularProgressIndicator();
             } else if (state is LoginSuccessState) {
               context.read<AuthBloc>().add(GetMeEvent());
-              context.read<MediaBloc>().add(LoadAllMediaEvent());
 
+              context.read<MediaBloc>().add(LoadAllMediaEvent());
+              // BlocListener<AuthBloc, AuthState>(
+              //   listener: (context, state) {},
+              // );
               Navigator.pushReplacementNamed(context, '/home');
             } else if (state is LoginErrorState) {
               SnackBarHelper.showCustomSnackBar(

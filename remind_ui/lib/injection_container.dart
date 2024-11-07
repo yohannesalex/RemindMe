@@ -68,10 +68,10 @@ Future<void> init() async {
       ));
 
   sl.registerLazySingleton<MediaRepository>(() => MediaRepositoryImpl(
-        mediaLocalDataSource: sl(),
-        mediaRemoteDataSource: sl(),
-        networkInfo: sl(),
-      ));
+      mediaLocalDataSource: sl(),
+      mediaRemoteDataSource: sl(),
+      networkInfo: sl(),
+      authLocalDataSource: sl()));
 
   //Data sources
   sl.registerLazySingleton<AuthRemoteDataSource>(
