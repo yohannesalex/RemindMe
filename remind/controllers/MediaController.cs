@@ -57,7 +57,7 @@ namespace remind.controllers
             var contents = mediaContentService.GetUserMediaContents(userId);
             return Ok(contents);
         }
-        [HttpGet("GetContentByCategory")]
+        [HttpGet("GetContentByCategory/{catagory}")]
         public ActionResult<List<MediaContent>> GetUserMediaContentsBycatagory(string catagory)
         {
             Console.WriteLine(catagory);
@@ -69,7 +69,7 @@ namespace remind.controllers
             var contents = mediaContentService.GetUserMediaContentsByCategory(userId, catagory);
             return Ok(contents);
         }
-        [HttpGet("GetContentByRemind")]
+        [HttpGet("GetContentByRemind/{remindBy}")]
         public ActionResult<List<MediaContent>> GetUserMediaContentsByremind(string remindBy)
         {
             var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;

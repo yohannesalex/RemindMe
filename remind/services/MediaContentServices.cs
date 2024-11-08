@@ -4,6 +4,7 @@ using Microsoft.Extensions.Configuration;
 using MongoDB.Bson;
 using MongoDB.Driver;
 using remind.models;
+using System.ComponentModel;
 using System.IO;
 
 namespace remind.services
@@ -23,8 +24,11 @@ namespace remind.services
             mediaContents.Find(content => content.UserId == userId).ToList();
         public MediaContent GetUserMediaContent(string id) =>
             mediaContents.Find(content => content.Id == id).FirstOrDefault();
-        public List<MediaContent> GetUserMediaContentsByCategory(string userId, string catagory) =>
-            mediaContents.Find(content => content.Category == catagory && content.UserId == userId).ToList();
+        public List<MediaContent> GetUserMediaContentsByCategory(string userId, string catagory) {
+            if (catagory == "All"){
+                return mediaContents.Find(content => content.UserId == userId).ToList();
+            }else{
+            return mediaContents.Find(content => content.Category == catagory && content.UserId == userId).ToList();}}
         public List<MediaContent> GetUserMediaContentByRemind(string userId, string remindby) =>
             mediaContents.Find(content => content.RemindBy == remindby && content.UserId == userId).ToList();
         public MediaContent CreateMediaContent(MediaContent mediaContent)

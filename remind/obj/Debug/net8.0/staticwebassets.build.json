@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "UfF6tZBJUmpOhQN0eesSKbJ8f4Bf93PmnyKqaOExbN8=",
+  "Hash": "O1mtIMq1JbXj/mauspenB/OAu4N6oPDPJTcTP5ByfMU=",
   "Source": "remind",
   "BasePath": "_content/remind",
   "Mode": "Default",
@@ -243,6 +243,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\11d34d2c-5f51-4ad0-931b-b6be3e62fe05.jpg"
+    },
+    {
+      "Identity": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\15c5aa25-6741-4188-8e1d-f9bd9c62b330.jpg",
+      "SourceId": "remind",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\",
+      "BasePath": "_content/remind",
+      "RelativePath": "images/15c5aa25-6741-4188-8e1d-f9bd9c62b330.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\15c5aa25-6741-4188-8e1d-f9bd9c62b330.jpg"
     },
     {
       "Identity": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\1b30cf3e-4345-4726-af30-a27337bf3bbe.jpg",
@@ -511,6 +530,25 @@
       "OriginalItemSpec": "wwwroot\\images\\4dc0fba5-8213-4f10-85b1-df1e3d00c6c7.jpg"
     },
     {
+      "Identity": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\4ece291d-cb07-4604-bc43-3c1f6a30ba9d.jpg",
+      "SourceId": "remind",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\",
+      "BasePath": "_content/remind",
+      "RelativePath": "images/4ece291d-cb07-4604-bc43-3c1f6a30ba9d.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\4ece291d-cb07-4604-bc43-3c1f6a30ba9d.jpg"
+    },
+    {
       "Identity": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\56151d03-9136-4599-b7e7-ae526eee29f6.png",
       "SourceId": "remind",
       "SourceType": "Discovered",
@@ -680,6 +718,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\7e4ce78b-e04a-40b9-865d-f68500a8b855.jpg"
+    },
+    {
+      "Identity": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\8291d9e1-7411-4b2e-9e8f-00dc93545f94.jpg",
+      "SourceId": "remind",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\",
+      "BasePath": "_content/remind",
+      "RelativePath": "images/8291d9e1-7411-4b2e-9e8f-00dc93545f94.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\8291d9e1-7411-4b2e-9e8f-00dc93545f94.jpg"
     },
     {
       "Identity": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\8b9268c8-78e6-495d-a275-0c2cddadd693.jpg",
