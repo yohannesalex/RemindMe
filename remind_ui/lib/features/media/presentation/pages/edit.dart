@@ -73,7 +73,6 @@ class _EditState extends State<Edit> {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 242, 189, 172),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);
@@ -199,7 +198,7 @@ class _EditState extends State<Edit> {
                           ),
                           _buildTextField(
                               label: "Keyword to remind",
-                              hint: "ex: That black guy",
+                              hint: "ex: car",
                               controller: widget._keywordController),
                           const SizedBox(
                             height: 15,

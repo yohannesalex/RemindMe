@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:jwt_decoder/jwt_decoder.dart';
 import 'package:remind_ui/features/media/presentation/pages/add.dart';
 import 'package:remind_ui/features/media/presentation/pages/detail.dart';
 import 'package:remind_ui/features/media/presentation/pages/edit.dart';
@@ -63,7 +64,10 @@ class MyApp extends StatelessWidget {
               if (snapshot.data == '/home') {
                 // Emit events here after the MultiBlocProvider is in context
                 context.read<AuthBloc>().add(GetMeEvent());
-                return Home(); // Navigate to Home page
+
+                return const Home(
+                  from: 'login',
+                ); // Navigate to Home page
               } else {
                 return const Welcome(); // Navigate to Welcome/Login page
               }
@@ -81,9 +85,11 @@ class MyApp extends StatelessWidget {
             case '/signup':
               return _buildPageRoute(const SignUp());
             case '/home':
-              return _buildPageRoute(Home());
+              return _buildPageRoute(const Home(
+                from: 'login',
+              ));
             case '/add':
-              return _buildPageRoute(Add());
+              return _buildPageRoute(const Add());
             case '/detail':
               return _buildPageRoute(Detail(
                 id: '',
@@ -100,11 +106,17 @@ class MyApp extends StatelessWidget {
           }
         },
         theme: ThemeData(
-          primaryColor: const Color.fromARGB(255, 63, 81, 243),
-          colorScheme: ColorScheme.fromSeed(
-            seedColor: const Color.fromARGB(255, 63, 81, 243),
+          primaryColor: const Color(0xFF0D1B2A), // Deep Navy
+          scaffoldBackgroundColor:
+              const Color(0xFFF0F4F8), // Soft Gray background
+          textTheme: const TextTheme(
+            bodyLarge: TextStyle(color: Colors.black), // Black text color
+            bodyMedium: TextStyle(color: Colors.black),
           ),
-          fontFamily: 'Poppins', // Set the default font family to Poppins
+          fontFamily: 'Poppins',
+          colorScheme: ColorScheme.fromSwatch().copyWith(
+              secondary: const Color(
+                  0xFFFFC107)), // Set the default font family to Poppins
         ),
       ),
     );
@@ -115,12 +127,19 @@ class MyApp extends StatelessWidget {
       SharedPreferences prefs = await SharedPreferences.getInstance();
       String? token = prefs.getString('CACHED_Token');
       print('Token: $token');
+
       if (token != null && token.isNotEmpty) {
-        return '/home';
+        if (JwtDecoder.isExpired(token)) {
+          await prefs.remove('CACHED_Token');
+          return '/';
+        } else {
+          return '/home';
+        }
       } else {
         return '/';
       }
     } catch (e) {
+      print('Error in _getInitialRoute: $e');
       return '/';
     }
   }

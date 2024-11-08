@@ -13,7 +13,7 @@ class GetMediabyfilterUsecase implements UseCase<void, GetByFilterParams> {
   @override
   Future<Either<Failure, List<MediaEntity>>> call(
       GetByFilterParams getByFilterparams) async {
-    return await mediaRepository.getMediaByCategory(getByFilterparams.remindBy);
+    return await mediaRepository.getMediaByRemind(getByFilterparams.remindBy);
   }
 }
 

@@ -65,7 +65,7 @@ class Welcome extends StatelessWidget {
           ),
           const Center(
             child: Text(
-              'Wellcome',
+              'Welcome',
               style: TextStyle(
                 fontFamily: 'CaveatBrush', // Specify the font family
                 fontSize: 45, // Font size

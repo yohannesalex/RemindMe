@@ -70,14 +70,14 @@ class DetailCardMedia {
                               .then((_) {
                             // Show a snackbar as feedback
                             ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
+                              const SnackBar(
                                   content: Text('Link copied to clipboard!')),
                             );
                           });
                         },
                         child: Text(
                           link,
-                          style: TextStyle(
+                          style: const TextStyle(
                               color: Colors.blue,
                               decoration: TextDecoration.underline),
                         ),
@@ -129,9 +129,9 @@ class DetailCardMedia {
                               id: id,
                               imageUrl: imageurl,
                               category: category,
-                              remindBy: keyWord,
-                              link: link,
-                              text: text,
+                              remindBy: keyWord ?? '',
+                              link: link ?? '',
+                              text: text ?? '',
                             ),
                           ),
                         );
@@ -228,14 +228,14 @@ class DetailCardMedia {
                                 .then((_) {
                               // Show a snackbar as feedback
                               ScaffoldMessenger.of(context).showSnackBar(
-                                SnackBar(
+                                const SnackBar(
                                     content: Text('Link copied to clipboard!')),
                               );
                             });
                           },
                           child: Text(
                             link,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Colors.blue,
                                 decoration: TextDecoration.underline),
                           ),

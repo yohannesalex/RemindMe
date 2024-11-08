@@ -13,7 +13,8 @@ import '../bloc/media_state.dart';
 import '../widgets/search_dropdown_widget.dart';
 
 class Home extends StatefulWidget {
-  const Home({super.key});
+  final String from;
+  const Home({super.key, required this.from});
 
   @override
   State<Home> createState() => _HomeState();
@@ -22,18 +23,8 @@ class Home extends StatefulWidget {
 class _HomeState extends State<Home> {
   final String _date = DateFormat('MMMM d, yyyy').format(DateTime.now());
   final TextEditingController _searchController = TextEditingController();
-  final ScrollController _scrollController = ScrollController();
   String selectedCategory = ''; // To store filter selection
   String searchQuery = ''; // To store search input
-
-  @override
-  void initState() {
-    super.initState();
-    WidgetsBinding.instance.addPostFrameCallback((_) {
-      _scrollController.jumpTo(0);
-      context.read<MediaBloc>().add(LoadAllMediaEvent()); // Initial media load
-    });
-  }
 
   void _onSearchChanged(String query) {
     setState(() {
@@ -56,7 +47,6 @@ class _HomeState extends State<Home> {
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            backgroundColor: const Color.fromARGB(255, 242, 189, 172),
             leading: PopupMenuButton<String>(
               icon: const Icon(Icons.person,
                   color: Color.fromARGB(255, 52, 48, 70), size: 40),
@@ -74,10 +64,10 @@ class _HomeState extends State<Home> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(_date,
-                    style: TextStyle(
+                    style: const TextStyle(
                         color: Color.fromARGB(255, 52, 48, 70), fontSize: 12)),
                 Row(children: [
-                  Text('Hello, ',
+                  const Text('Hello, ',
                       style: TextStyle(
                           color: Color.fromARGB(255, 52, 48, 70),
                           fontSize: 15)),
@@ -85,7 +75,7 @@ class _HomeState extends State<Home> {
                     builder: (context, state) {
                       if (state is GetMeSuccessState) {
                         return Text(state.user.name,
-                            style: TextStyle(
+                            style: const TextStyle(
                                 color: Color.fromARGB(255, 8, 3, 91),
                                 fontSize: 15));
                       } else {
@@ -104,6 +94,7 @@ class _HomeState extends State<Home> {
                     position: const RelativeRect.fromLTRB(100, 56, 0, 0),
                     items: [
                       for (var category in [
+                        'All',
                         'Family',
                         'Friends',
                         'School',
@@ -126,8 +117,10 @@ class _HomeState extends State<Home> {
                 icon: const Icon(Icons.search,
                     color: Color.fromARGB(255, 52, 48, 70)),
                 onPressed: () {
-                  SearchDropdown.showSearchDropdown(context, _searchController,
-                      onSearchChanged: _onSearchChanged);
+                  SearchDropdown.showSearchDropdown(
+                    context,
+                    _searchController,
+                  );
                 },
               ),
               PopupMenuButton<String>(
@@ -141,77 +134,84 @@ class _HomeState extends State<Home> {
               ),
             ],
           ),
-          body: Column(
-            children: [
-              const SizedBox(height: 30),
-              BlocBuilder<MediaBloc, MediaState>(
-                builder: (context, state) {
-                  if (state is InitialState) {
-                    return const Center(child: Text('No Media'));
-                  } else if (state is LoadedAllMediaState ||
-                      state is LoadedAllMediaByCategoryState ||
-                      state is LoadedAllMediaByRemindState) {
-                    // Filter and search results
-                    List<MediaEntity> mediaList;
-                    if (state is LoadedAllMediaState) {
-                      mediaList = state.mediaList;
-                    } else if (state is LoadedAllMediaByCategoryState) {
-                      mediaList = state.mediaList;
-                    } else if (state is LoadedAllMediaByRemindState) {
-                      mediaList = state.mediaList;
-                    } else {
-                      mediaList = [];
-                    }
-
-                    List<MediaEntity> filteredMediaList = mediaList
-                        .where((media) =>
-                            (selectedCategory.isEmpty ||
-                                media.category == selectedCategory) &&
-                            (searchQuery.isEmpty ||
-                                media.text!.contains(searchQuery)))
-                        .toList();
-
-                    return Expanded(
-                      child: ListView.builder(
-                        controller: _scrollController,
-                        itemCount: filteredMediaList.length,
-                        itemBuilder: (context, index) {
-                          final media = filteredMediaList[index];
-                          if (media.imageUrl != null) {
-                            return cardMedia.displaywithImage(
-                              context,
-                              media.id,
-                              media.imageUrl,
-                              media.text,
-                              media.link,
-                              media.category,
-                              media.remindBy,
-                              media.createdAt,
-                            );
+          body: widget.from != 'signup'
+              ? Column(
+                  children: [
+                    const SizedBox(height: 30),
+                    BlocBuilder<MediaBloc, MediaState>(
+                      builder: (context, state) {
+                        if (state is InitialState) {
+                          return const Center(child: Text('No Media'));
+                        } else if (state is LoadedAllMediaState ||
+                            state is LoadedAllMediaByCategoryState ||
+                            state is LoadedAllMediaByRemindState) {
+                          // Filter and search results
+                          List<MediaEntity> mediaList;
+                          if (state is LoadedAllMediaState) {
+                            mediaList = state.mediaList;
+                          } else if (state is LoadedAllMediaByCategoryState) {
+                            mediaList = state.mediaList;
+                          } else if (state is LoadedAllMediaByRemindState) {
+                            mediaList = state.mediaList;
                           } else {
-                            return cardMedia.displaywithoutImage(
-                              context,
-                              media.id,
-                              media.text,
-                              media.link,
-                              media.category,
-                              media.remindBy,
-                              media.createdAt,
-                            );
+                            mediaList = [];
                           }
-                        },
-                      ),
-                    );
-                  } else if (state is ErrorState) {
-                    return const Center(
-                        child: Text('The media could not be loaded'));
-                  } else {
-                    return const Center(child: CircularProgressIndicator());
-                  }
-                },
-              ),
-            ],
-          ),
+                          if (mediaList.isEmpty) {
+                            return const Center(
+                                child: Text('No Media is Available'));
+                          }
+                          mediaList.sort(
+                              (a, b) => b.createdAt.compareTo(a.createdAt));
+
+                          return Expanded(
+                            child: ListView.builder(
+                              itemCount: mediaList.length,
+                              itemBuilder: (context, index) {
+                                final media = mediaList[index];
+                                if (media.imageUrl != null) {
+                                  return cardMedia.displaywithImage(
+                                    context,
+                                    media.id,
+                                    media.imageUrl,
+                                    media.text,
+                                    media.link,
+                                    media.category,
+                                    media.remindBy,
+                                    media.createdAt,
+                                  );
+                                } else {
+                                  return cardMedia.displaywithoutImage(
+                                    context,
+                                    media.id,
+                                    media.text,
+                                    media.link,
+                                    media.category,
+                                    media.remindBy,
+                                    media.createdAt,
+                                  );
+                                }
+                              },
+                            ),
+                          );
+                        } else if (state is ErrorState) {
+                          return const Center(
+                              child: Column(
+                            children: [
+                              Text('The media could not be loaded'),
+                              Text('start by adding your content')
+                            ],
+                          ));
+                        } else {
+                          return const Center(
+                              child: CircularProgressIndicator());
+                        }
+                      },
+                    ),
+                  ],
+                )
+              : const Center(
+                  child: Text("No Media avaliable"),
+                ),
         );
       },
     );

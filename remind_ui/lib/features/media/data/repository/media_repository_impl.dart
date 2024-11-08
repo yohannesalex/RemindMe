@@ -124,6 +124,8 @@ class MediaRepositoryImpl implements MediaRepository {
     if (await networkInfo.isConnected) {
       networkInfo.isConnected;
       try {
+        print(
+            '2222222222222222222222222222222222222222222222222222222222222222222222222222222');
         return (Right(await mediaRemoteDataSource.getMediaByRemind(remindBy)));
       } on ServerException {
         return Left(ServerFailure());

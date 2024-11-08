@@ -39,16 +39,18 @@ class MediaBloc extends Bloc<MediaEvent, MediaState> {
         emit(LoadedSingleMediaState(media: data));
       });
     }, transformer: debounce(const Duration(milliseconds: 300)));
-    on<LoadAllMediaEvent>((event, emit) async {
-      emit(LoadingState());
-      final result = await _getAllmediaUsecase();
+    on<LoadAllMediaEvent>(
+      (event, emit) async {
+        emit(LoadingState());
+        final result = await _getAllmediaUsecase();
 
-      result.fold((failure) {
-        emit(const ErrorState(message: 'unable to load'));
-      }, (data) {
-        emit(LoadedAllMediaState(mediaList: data));
-      });
-    });
+        result.fold((failure) {
+          emit(const ErrorState(message: 'unable to load'));
+        }, (data) {
+          emit(LoadedAllMediaState(mediaList: data));
+        });
+      },
+    );
     on<GetMediaByCategoryEvent>((event, emit) async {
       emit(LoadingState());
       final result = await _getMediabycatagoryUsecase(

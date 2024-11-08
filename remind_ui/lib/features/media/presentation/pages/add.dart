@@ -48,7 +48,6 @@ class _AddState extends State<Add> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 242, 189, 172),
         leading: IconButton(
           onPressed: () {
             Navigator.pop(context);

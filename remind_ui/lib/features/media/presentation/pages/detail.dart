@@ -43,7 +43,6 @@ class Detail extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 242, 189, 172),
           leading: IconButton(
             onPressed: () {
               Navigator.pop(context);

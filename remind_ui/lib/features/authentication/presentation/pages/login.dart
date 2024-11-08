@@ -22,9 +22,7 @@ class _LoginState extends State<Login> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: Color(0xFFFFEBEE),
         appBar: AppBar(
-          backgroundColor: const Color.fromARGB(255, 242, 189, 172),
           automaticallyImplyLeading: false,
         ),
         body: BlocListener<AuthBloc, AuthState>(
@@ -35,9 +33,7 @@ class _LoginState extends State<Login> {
               context.read<AuthBloc>().add(GetMeEvent());
 
               context.read<MediaBloc>().add(LoadAllMediaEvent());
-              // BlocListener<AuthBloc, AuthState>(
-              //   listener: (context, state) {},
-              // );
+
               Navigator.pushReplacementNamed(context, '/home');
             } else if (state is LoginErrorState) {
               SnackBarHelper.showCustomSnackBar(
@@ -88,7 +84,7 @@ class _LoginState extends State<Login> {
                     height: 60,
                   ),
                   const Text(
-                    'Wellcome Back',
+                    'Welcome Back',
                     style: TextStyle(
                       fontFamily: 'CaveatBrush', // Specify the font family
                       fontSize: 45.0, // Font size

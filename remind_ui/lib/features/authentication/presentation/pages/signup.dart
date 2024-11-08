@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../../../core/constant/privacy.dart';
 import '../../../../core/validation/input_validation.dart';
+import '../../../media/presentation/pages/home.dart';
 import '../../domain/entity/signup_entity.dart';
 import '../bloc/auth_bloc.dart';
 import '../bloc/auth_event.dart';
@@ -38,9 +39,7 @@ class _SignUpState extends State<SignUp> {
           ),
         ),
         child: Scaffold(
-          backgroundColor: Color(0xFFFFEBEE),
           appBar: AppBar(
-            backgroundColor: Color.fromARGB(255, 242, 189, 172),
             leading: IconButton(
               onPressed: () {
                 Navigator.pop(context);
@@ -72,7 +71,14 @@ class _SignUpState extends State<SignUp> {
                 );
               } else if (state is SignUpSuccessState) {
                 context.read<AuthBloc>().add(GetMeEvent());
-                Navigator.pushReplacementNamed(context, '/home');
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const Home(
+                      from: 'signup',
+                    ),
+                  ),
+                );
               } else if (state is SignUpErrorState) {
                 SnackBarHelper.showCustomSnackBar(
                     context, 'user with this email already exists');
