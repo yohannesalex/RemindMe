@@ -9,12 +9,12 @@ class SearchDropdown {
       BuildContext context, final TextEditingController searchController) {
     showMenu(
       context: context,
-      position: const RelativeRect.fromLTRB(100, 56, 0, 0),
+      position: const RelativeRect.fromLTRB(60, 200, 200, 400),
       items: [
         PopupMenuItem(
           enabled: false, // Disable selection for this item
           child: SizedBox(
-            width: 200,
+            width: 600,
             child: TextField(
               controller: searchController,
               decoration: const InputDecoration(
@@ -28,7 +28,7 @@ class SearchDropdown {
           child: TextButton(
             style: TextButton.styleFrom(
               foregroundColor: Colors.white,
-              backgroundColor: Colors.blue,
+              backgroundColor: const Color.fromARGB(255, 149, 181, 206),
             ),
             onPressed: () {
               context.read<MediaBloc>().add(
@@ -38,7 +38,13 @@ class SearchDropdown {
               searchController.clear();
               Navigator.pop(context); // Close the dropdown
             },
-            child: const Text("Go"),
+            child: Container(
+                width: 100,
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(5),
+                  color: const Color.fromARGB(255, 149, 181, 206),
+                ),
+                child: Center(child: Text("Go"))),
           ),
         ),
       ],

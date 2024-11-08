@@ -144,7 +144,39 @@ class DetailCardMedia {
                     ),
                     ElevatedButton(
                       onPressed: () {
-                        context.read<MediaBloc>().add(DeleteMediaEvent(id));
+                        showDialog(
+                          context: context,
+                          builder: (BuildContext context) {
+                            return AlertDialog(
+                              title: const Text('Delete'),
+                              content: const Text(
+                                  'Are you sure you want to delete this media?'),
+                              actions: <Widget>[
+                                TextButton(
+                                  onPressed: () {
+                                    Navigator.of(context)
+                                        .pop(); // Close the dialog
+                                  },
+                                  child: const Text('Cancel',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600)),
+                                ),
+                                TextButton(
+                                  onPressed: () {
+                                    context
+                                        .read<MediaBloc>()
+                                        .add(DeleteMediaEvent(id));
+                                    Navigator.of(context)
+                                        .pop(); // Close the dialog after delete
+                                  },
+                                  child: const Text('Delete',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.w600)),
+                                ),
+                              ],
+                            );
+                          },
+                        );
                       },
                       child: const Text('Delete',
                           style: TextStyle(fontWeight: FontWeight.w600)),
@@ -293,7 +325,39 @@ class DetailCardMedia {
                       ),
                       ElevatedButton(
                         onPressed: () {
-                          context.read<MediaBloc>().add(DeleteMediaEvent(id));
+                          showDialog(
+                            context: context,
+                            builder: (BuildContext context) {
+                              return AlertDialog(
+                                title: const Text('Delete'),
+                                content: const Text(
+                                    'Are you sure you want to delete this media?'),
+                                actions: <Widget>[
+                                  TextButton(
+                                    onPressed: () {
+                                      Navigator.of(context)
+                                          .pop(); // Close the dialog
+                                    },
+                                    child: const Text('Cancel',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600)),
+                                  ),
+                                  TextButton(
+                                    onPressed: () {
+                                      context
+                                          .read<MediaBloc>()
+                                          .add(DeleteMediaEvent(id));
+                                      Navigator.of(context)
+                                          .pop(); // Close the dialog after delete
+                                    },
+                                    child: const Text('Delete',
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.w600)),
+                                  ),
+                                ],
+                              );
+                            },
+                          );
                         },
                         child: const Text('Delete',
                             style: TextStyle(fontWeight: FontWeight.w600)),

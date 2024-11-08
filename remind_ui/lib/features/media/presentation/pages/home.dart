@@ -197,8 +197,7 @@ class _HomeState extends State<Home> {
                           return const Center(
                               child: Column(
                             children: [
-                              Text('The media could not be loaded'),
-                              Text('start by adding your content')
+                              Text('No content'),
                             ],
                           ));
                         } else {
