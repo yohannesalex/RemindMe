@@ -73,5 +73,19 @@ namespace remind.services
             // Return the URL of the saved image
             return $"/images/{fileName}";
         }
+        public bool DeleteImage(string imageUrl)
+{
+    // Construct the full path of the image in the wwwroot folder
+    var filePath = Path.Combine("wwwroot", imageUrl.TrimStart('/'));
+
+    if (File.Exists(filePath))
+    {
+        File.Delete(filePath);
+        return true; // Indicate that the file was successfully deleted
+    }
+    
+    return false; // Indicate that the file was not found
+}
+
     }
 }

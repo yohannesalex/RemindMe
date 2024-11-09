@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "O1mtIMq1JbXj/mauspenB/OAu4N6oPDPJTcTP5ByfMU=",
+  "Hash": "nBEdLDHeLrJM0ajxmw0cCIj+OmEH+o8DAPn38I9dFZ8=",
   "Source": "remind",
   "BasePath": "_content/remind",
   "Mode": "Default",
@@ -262,6 +262,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\15c5aa25-6741-4188-8e1d-f9bd9c62b330.jpg"
+    },
+    {
+      "Identity": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\16f49310-5f81-4ad2-8638-a0c0b017149a.jpg",
+      "SourceId": "remind",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\",
+      "BasePath": "_content/remind",
+      "RelativePath": "images/16f49310-5f81-4ad2-8638-a0c0b017149a.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\16f49310-5f81-4ad2-8638-a0c0b017149a.jpg"
     },
     {
       "Identity": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\1b30cf3e-4345-4726-af30-a27337bf3bbe.jpg",
@@ -604,6 +623,25 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\images\\627f7574-d1e0-4f31-bcc2-0ea8db601c31.jpg"
+    },
+    {
+      "Identity": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\658205da-6e8a-4378-aab5-8c4f2501008d.jpg",
+      "SourceId": "remind",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\",
+      "BasePath": "_content/remind",
+      "RelativePath": "images/658205da-6e8a-4378-aab5-8c4f2501008d.jpg",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "PreferTarget",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\images\\658205da-6e8a-4378-aab5-8c4f2501008d.jpg"
     },
     {
       "Identity": "C:\\.net\\rem\\RemindMe\\remind\\wwwroot\\images\\6849e4db-94ff-47ab-a6e5-0999fa637193.png",
